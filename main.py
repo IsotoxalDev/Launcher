@@ -48,7 +48,7 @@ class Launcher:
 
     def next(self):
         self.name = self.name.get()
-        text = '[Desktop Entry]\nName='+self.name+'\nExec='+self.e_path+'\nTerminal=false\nType=Application\nIcon='+self.i_path
+        text = '[Desktop Entry]\nName='+self.name+'\nExec='+self.exec.get()+'\nTerminal=false\nType=Application\nIcon='+self.icon.get()
         #os.system('touch ~/.local/share/applications/'+self.name+'.desktop')
         f = open('../../.local/share/applications/'+self.name+'.desktop', 'w')
         f.write(text)
