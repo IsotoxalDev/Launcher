@@ -1,7 +1,26 @@
 import os
-from tkinter import filedialog
-import tkinter
-
+try:
+    import tkinter
+    from tkinter import filedialog
+except:
+    print("It looks like you don't have tkinter.\n If you are on a Debian based distro(ubuntu. pop OS, Linux Mint) type: DEB\nIf you are on a Arch based distro(Manjaro, Arco Linux) type: ARCH\n If you are on redhat basd distro(Fedoro, RHEL) type: RH\n If you are on another distro please install tkinter with your distro's package manager (<ctrl + c> to exit). Thank You! ")
+    DISTRO = input("Your Input: ")
+    if DISTRO == "DEB":
+            os.system("sudo apt install python3-tk")
+            from tkinter import filedialog
+            import tkinter
+    elif DISTRO == "ARCH":
+            os.system("sudo pacman -S tk")
+            from tkinter import filedialog
+            import tkinter
+    elif DISTRO == "RF":
+            os.system("sudo dnf install python3-tkinter")
+            from tkinter import filedialog
+            import tkinter
+    else:
+            print("Wrong Input")
+            import sys
+            sys.exit()
 
 def Label(text, tk, row = 0, col = 0):
     tkinter.Label(tk, text = text, padx = 10).grid(row = row, column = col)
