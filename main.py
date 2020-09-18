@@ -27,11 +27,14 @@ class Launcher:
         self.name = Entry(self.tk, 50, 0, 1)
         Label('Exec: ', self.tk, 1)
         self.exec = Entry(self.tk, 50, 1, 1)
+        self.WEB = 0
+        self.checkWeb = tkinter.Checkbutton(self.tk, text='Web', onvalue=1, offvalue=0, command=self.web)
+        self.checkWeb.grid(row = 3, column = 1)
         tkinter.Button(text = 'Browse', command = self.exec_path).grid(row = 1, column = 2)
         Label('Icon ', self.tk, 2)
         self.icon = Entry(self.tk, 50, 2, 1)
         tkinter.Button(text = 'Browse', command = self.icon_path).grid(row = 2, column = 2)
-        tkinter.Button(text = 'Continue', command = self.next, padx = 100).grid(row = 3, column = 1)
+        tkinter.Button(text = 'Continue', command = self.next, padx = 100).grid(row = 4, column = 1)
         self.tk.mainloop()
     def set_location(self, file, entry):
         entry.insert(0, file)
@@ -46,9 +49,15 @@ class Launcher:
         self.i_path = file
         self.set_location(file, self.icon)
 
+    def web(self):
+        self.WEB = 1 if self.WEB == 0 else 0
+
     def next(self):
         self.name = self.name.get()
-        text = '[Desktop Entry]\nName='+self.name+'\nExec='+self.exec.get()+'\nTerminal=false\nType=Application\nIcon='+self.icon.get()
+        if self.WEB == 1:
+            text = '[Desktop Entry]\nName='+self.name+'\nExec=xdg-open '+self.exec.get()+'\nTerminal=false\nType=Application\nIcon='+self.icon.get()
+        else:
+            text = '[Desktop Entry]\nName='+self.name+'\nExec='+self.exec.get()+'\nTerminal=false\nType=Application\nIcon='+self.icon.get()
         #os.system('touch ~/.local/share/applications/'+self.name+'.desktop')
         f = open('../../.local/share/applications/'+self.name+'.desktop', 'w')
         f.write(text)
