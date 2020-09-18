@@ -22,7 +22,7 @@ class Launcher:
 
     def __init__(self):
         self.tk.title('Add Launcher - Abhinav')
-        self.tk.geometry('555x120')
+        self.tk.geometry('555x130')
         Label('Name: ', self.tk)
         self.name = Entry(self.tk, 50, 0, 1)
         Label('Exec: ', self.tk, 1)
